@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	    <title>工资管理系统</title>
+	    <script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/boostrap/bootstrap.css"/>
+	</head>
+	<body background="img/login-bg1.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%;background-attachment: fixed;">
+	<div  style="margin-top:10px ;">
+		<a href="ChangePwd.html" style="color: white;">
+		<h4 style="display: inline;">修改密码</h4>
+		</a>
+    </div>
+
+	<h1 class="text-center"style="margin-bottom: 50px; color: white;" > 工资明细</h1>	
+
+	<table class="table " style="color: white;">
+	
+	<thead>
+		<tr bgcolor="#66AFE9" ><td style="height: 35px;">基本信息</td></tr>
+		<tr bgcolor="#5BC0DE">
+			<th>基本职能</th>
+			<th>职位补助</th>
+			<th>职称补助</th>
+			<th>水电费</th>
+			<th>基本业绩</th>
+			<th>夜勤补助</th>
+			<th>所得税</th>
+			<th>欠勤</th>
+		</tr>
+		<tr>
+			<td id="基本职能"></td>
+			<td id="职位补助"></td>
+			<td id="职称补助"></td>
+			<td id="水电费"></td>
+			<td id="基本业绩"></td>
+			<td id="夜勤补助"></td>
+			<td id="所得税"></td>
+			<td id="欠勤"></td>
+		</tr>
+		<tr bgcolor="#5BC0DE">
+			<th>业绩能力</th>
+			<th>固定加班费</th>
+			<th>交通补助</th>
+			<th>住房公积金</th>
+			<th>其它</th>
+			<th>满勤补助</th>
+			<th>绩效奖金</th>
+			<th>其它补助</th>
+		</tr>
+		<tr>
+			<td id="业绩能力"></td>
+			<td id="固定加班费"></td>
+			<td id="交通补助"></td>
+			<td id="住房公积金"></td>
+			<td id="其它"></td>
+			<td id="满勤补助"></td>
+			<td id="绩效奖金"></td>
+			<td id="其它补助"></td>
+		</tr>
+		<tr bgcolor="#5BC0DE">
+			<th>社会保险费</th>
+			<th>工会会费</th>
+			<th>住房补助</th>
+			<th>工种补助</th>
+			<th>加班费</th>
+			<th>应发合计</th>
+			<th>实发合计</th>
+			<th> </th>
+		</tr>
+		<tr>
+			<td id="社会保险费"></td>
+			<td id="工会会费"></td>
+			<td id="住房补助"></td>
+			<td id="工种补助"></td>
+			<td id="加班费"></td>
+			<td id="应发合计"></td>
+			<td id="实发合计"></td>
+			<td ></td>
+		</tr>
+		<tr bgcolor="#66AFE9"><td>请假情况</td></tr>
+		<tr bgcolor="#5BC0DE">
+			<th>事假</th>
+			<th>病假</th>
+			<th>旷工</th>
+			<th>迟到早退</th>
+			<th>婚假</th>
+			<th>丧假</th>
+			<th>产假</th>
+			<th> 年休假</th>
+		</tr>
+		<tr>
+			<td id="事假"></td>
+			<td id="病假"></td>
+			<td id="旷工"></td>
+			<td id="迟到早退"></td>
+			<td id="婚假"></td>
+			<td id="丧假"></td>
+			<td id="产假"></td>
+			<td id ="年休假" ></td>
+		</tr>
+		<tr bgcolor="#5BC0DE">
+			<th>工伤假</th>
+			<th>产检假</th>
+			<th>陪产假</th>
+			<th>流产假</th>
+			<th>路程假</th>
+			<th>其它假</th>
+			<th>调休时数</th>
+			<th> </th>
+		</tr>
+		<tr>
+			<td id="工伤假"></td>
+			<td id="产检假"></td>
+			<td id="陪产假"></td>
+			<td id="流产假"></td>
+			<td id="路程假"></td>
+			<td id="其它假"></td>
+			<td id="调休时数"></td>
+		</tr>
+		<tr bgcolor="#66AFE9"><td>加班情况</td></tr>
+		<tr bgcolor="#5BC0DE">
+			<th>平日加班时数</th>
+			<th>休日加班时数</th>
+			<th>假日加班时数</th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th> </th>
+			<th> </th>
+		</tr>
+		<tr>
+			<td id="平日时数"></td>
+			<td id="休日时数"></td>
+			<td id="假日时数"></td>
+		</tr>
+	</thead>
+	<tbody>
+
+	</tbody>
+</table>
+	<table class="table " style="color: white;" >
+		<thead></thead>
+		<tbody  id="tbody1"></tbody>
+	</table>
+	</body>
+<script type="text/javascript">
+	var personId= localStorage.getItem("personId");
+	var imforUrl="http://127.0.0.1:5000/imformation";
+	//添加加班表格式
+		$("#tbody1").append("<tr bgcolor='#66AFE9'><td>加班详细</td></tr>")
+	
+	for (var i=0;i<3;i++) {
+		$("#tbody1").append("<tr bgcolor='#5BC0DE' id='加班信息行"+(i+1)+"'></tr>");
+		for (var j=0;j<16;j++) {
+			if((i==2)&&(j==15)){
+				$("#加班信息行"+i).append("<th></th>");
+				break;}
+			$("#加班信息行"+i).append("<th >加班"+(j+(16*(i-1))+1)+"日</th>")
+		}
+		$("#tbody1").append("<tr  id='加班行"+(i+1)+"'></tr>");
+		for(var k=0;k<16;k++){
+			if((i==2)&&(k==16)){break;}
+			$("#加班行"+i).append("<td id='加班"+(k+(16*(i-1))+1)+"日'></td>")
+		}
+	}
+	
+	//添加调休表格式
+		$("#tbody1").append("<tr bgcolor='#66AFE9'><td>调休详细</td></tr>")
+	
+		for (var i=0;i<3;i++) {
+		$("#tbody1").append("<tr bgcolor='#5BC0DE' id='调休信息行"+(i+1)+"'></tr>");
+		for (var j=0;j<16;j++) {
+			if((i==2)&&(j==15)){$("#调休信息行"+i).append("<th></th>");break;}
+			$("#调休信息行"+i).append("<th >调休"+(j+(16*(i-1))+1)+"日</th>")
+		}
+		$("#tbody1").append("<tr  id='调休行"+(i+1)+"'></tr>");
+		for(var k=0;k<16;k++){
+			if((i==2)&&(k==16)){break;}
+			$("#调休行"+i).append("<td id='调休"+(k+(16*(i-1))+1)+"日'></td>")
+		}
+	}
+	
+	function TestSend () {
+			$.ajax({          
+			url: imforUrl,
+			data: {'userNo': personId},
+			dataType: 'json',
+			type: 'post',
+			async: true,
+			crossDomain: true,
+			success: function(result) {
+				 for (var item in result) {
+				 	$("#"+item+"").html(result[item]);
+				 }
+
+			}});
+	}
+	TestSend();
+</script>
+</html>
